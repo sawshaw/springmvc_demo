@@ -7,6 +7,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>web Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>4.3.17.RELEASE</spring.version>
+		<jpa.version>1.7.1.RELEASE</jpa.version>
+		<log4j2.version>2.7</log4j2.version>
+  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -17,57 +24,57 @@
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-core</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-beans</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context-support</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-tx</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-aop</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-web</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-webmvc</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-orm</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-jdbc</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework.data</groupId>
 	    <artifactId>spring-data-jpa</artifactId>
-	    <version>2.0.8.RELEASE</version>
+	    <version>${jpa.version}</version>
 	    <exclusions>
 				<exclusion>
 					<artifactId>slf4j-api</artifactId>
@@ -78,12 +85,12 @@
     <dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-expression</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-test</artifactId>
-	    <version>5.0.7.RELEASE</version>
+	    <version>${spring.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.slf4j</groupId>
@@ -93,22 +100,22 @@
 	<dependency>
 	    <groupId>org.apache.logging.log4j</groupId>
 	    <artifactId>log4j-core</artifactId>
-	    <version>2.11.0</version>
+	    <version>${log4j2.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.logging.log4j</groupId>
 	    <artifactId>log4j-api</artifactId>
-	    <version>2.11.0</version>
+	    <version>${log4j2.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.logging.log4j</groupId>
 	    <artifactId>log4j-web</artifactId>
-	    <version>2.11.0</version>
+	    <version>${log4j2.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.logging.log4j</groupId>
 	    <artifactId>log4j-slf4j-impl</artifactId>
-	    <version>2.11.0</version>
+	    <version>${log4j2.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.logging.log4j</groupId>
@@ -120,20 +127,42 @@
 		<groupId>javax.servlet</groupId>
 		<artifactId>javax.servlet-api</artifactId>
 		<version>3.1.0</version>
+		<scope>provided</scope>
 	</dependency>
 	<dependency>
 		<groupId>javax.servlet.jsp</groupId>
 		<artifactId>javax.servlet.jsp-api</artifactId>
 		<version>2.3.1</version>
+		<scope>provided</scope>
 	</dependency>
 	<dependency>
 		<groupId>javax.servlet</groupId>
 		<artifactId>jstl</artifactId>
 		<version>1.2</version>
+		<scope>provided</scope>
 	</dependency>
 	<!-- servlet end -->
+	<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>1.2.47</version>
+</dependency>
   </dependencies>
+
   <build>
-    <finalName>web</finalName>
-  </build>
+		<finalName>web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/html</url>
+					<server>tomcat</server>
+				</configuration>
+			</plugin>
+		
+		</plugins>
+		<defaultGoal>compile</defaultGoal>
+	</build>
 </project>
