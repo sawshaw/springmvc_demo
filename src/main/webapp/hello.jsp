@@ -27,7 +27,7 @@
     </head>
 
     <body>
-     <h1>hello,world,webRoot,jsp</h1>
+    <h1>hello,world,webRoot,jsp</h1>
         <div>
             <p class="greeting-id">The ID is </p>
             <p class="greeting-content">The content is </p>

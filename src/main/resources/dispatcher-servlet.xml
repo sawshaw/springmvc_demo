@@ -3,6 +3,7 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	   xmlns:tx="http://www.springframework.org/schema/tx"
 	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -19,4 +20,34 @@
 	<context:component-scan base-package="com.sawshaw" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
+		<!-- 视图解析器1:html视图解析器 必须先配置freemarkerConfig,注意html是没有prefix前缀属性的 -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="freemarkerSettings">
+			<bean
+				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+				<property name="properties">
+					<props>
+						<prop key="default_encoding">utf-8</prop>
+						<prop key="output_encoding">utf-8</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+		<property name="templateLoaderPath">
+			<value>/WEB-INF/views/</value>
+		</property>
+	</bean>
+	<bean id="htmlviewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+		p:suffix=".html" p:order="0">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+	<!-- 视图解析器2:jsp视图解析器 -->
+	<bean id="jspviewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:order="1">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+	<mvc:resources location="/" mapping="*.html"/>
 </beans>

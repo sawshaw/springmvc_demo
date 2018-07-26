@@ -14,9 +14,10 @@
         <title>Hello jQuery</title>
         <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
         <script>
+        var basepath = '<%=basePath %>';
         $(document).ready(function() {
             $.ajax({
-                url: "me/greeting"
+                url: basepath+"/me/greeting"
             }).then(function(data) {
             	var obj=JSON.parse(data);
                $('.greeting-id').append(obj.id);
@@ -27,7 +28,7 @@
     </head>
 
     <body>
-     <h1>hello,world,webRoot,jsp</h1>
+    <h1>hello,world,web-inf,jsp</h1>
         <div>
             <p class="greeting-id">The ID is </p>
             <p class="greeting-content">The content is </p>
