@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello-webRoot</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script>
+        function getRootPath_web() {
+            //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+            var curWwwPath = window.document.location.href;
+            //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+            var pathName = window.document.location.pathname;
+            var pos = curWwwPath.indexOf(pathName);
+            //获取主机地址，如： http://localhost:8083
+            var localhostPaht = curWwwPath.substring(0, pos);
+            //获取带"/"的项目名，如：/uimcardprj
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+            return (localhostPaht + projectName);
+        }
+        $(document).ready(function() {
+        	var root=getRootPath_web();
+            $.ajax({
+                url: root+"/me/greeting"
+            }).then(function(data) {
+            	var obj=JSON.parse(data);
+                $('.greeting-id').append(obj.id);
+                $('.greeting-content').append(obj.content);
+            });
+        });
+        </script>
+    </head>
+
+    <body>
+    <h1>hello,world  web-INF</h1>
+        <div>
+         <p class="greeting-id">The ID is </p>
+            <p class="greeting-content">The content is </p>
+        </div>
+    </body>
+</html>
