@@ -33,7 +33,7 @@
             <p class="greeting-id">The ID is </p>
             <p class="greeting-content">The content is </p>
         </div>
-        <form action="me/postData" method="post">
+        <form action="<%=basePath %>/me/postData" method="post">
       	  用户名：<input type="text" name="userName"/>
         <input type="button" value="提交数据"/>
         </form>
