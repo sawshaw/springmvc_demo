@@ -56,7 +56,7 @@ public class PageFowardController {
 		ModelAndView mv = new ModelAndView("redirect:/hello.html");
 	    return mv;
 	}
-	/**
+	/**  
 	 * @param request
 	 * 这个方法是重定向webapp下的hello.html
 	 * @param response
